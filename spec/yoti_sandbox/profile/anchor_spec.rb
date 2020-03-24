@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::Profile::Request::Anchor' do
+describe 'Yoti::Sandbox::Profile::Anchor' do
   let :value do
     'value'
   end
@@ -14,7 +14,7 @@ describe 'Yoti::Sandbox::Profile::Request::Anchor' do
   end
   describe '.source' do
     let :anchor do
-      Yoti::Sandbox::Profile::Request::Anchor.source(value, sub_type: subtype, timestamp: timestamp)
+      Yoti::Sandbox::Profile::Anchor.source(value, sub_type: subtype, timestamp: timestamp)
     end
     it 'creates a source anchor' do
       expected = '{"type":"SOURCE","value":"value","sub_type":"subtype","timestamp":1215302400000000}'
@@ -23,7 +23,7 @@ describe 'Yoti::Sandbox::Profile::Request::Anchor' do
   end
   describe '.verifier' do
     let :anchor do
-      Yoti::Sandbox::Profile::Request::Anchor.verifier(value, sub_type: subtype, timestamp: timestamp)
+      Yoti::Sandbox::Profile::Anchor.verifier(value, sub_type: subtype, timestamp: timestamp)
     end
     it 'creates a verifier anchor' do
       expected = '{"type":"VERIFIER","value":"value","sub_type":"subtype","timestamp":1215302400000000}'
