@@ -4,12 +4,6 @@ module Yoti
   module Sandbox
     module Profile
       class Attribute
-        attr_accessor :name
-        attr_accessor :value
-        attr_accessor :derivation
-        attr_accessor :optional
-        attr_reader :anchors
-
         def initialize(
           name: '',
           value: '',
@@ -26,27 +20,16 @@ module Yoti
 
         def as_json(*_args)
           {
-            name: name,
-            value: value,
-            derivation: derivation,
-            optional: optional,
-            anchors: anchors.map(&:as_json)
+            name: @name,
+            value: @value,
+            derivation: @derivation,
+            optional: @optional,
+            anchors: @anchors.map(&:as_json)
           }
         end
 
         def to_json(*args)
           as_json(*args).to_json
-        end
-      end
-
-      # Helper functions for building derivation strings
-      module Derivation
-        def self.age_over(age)
-          "age_over:#{age}"
-        end
-
-        def self.age_under(age)
-          "age_under:#{age}"
         end
       end
     end
