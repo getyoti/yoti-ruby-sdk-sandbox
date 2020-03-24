@@ -37,11 +37,6 @@ module Yoti
         def to_json(*args)
           as_json(*args).to_json
         end
-
-        def with_anchor(anchor)
-          @anchors.push anchor
-          self
-        end
       end
 
       # Helper functions for building derivation strings
