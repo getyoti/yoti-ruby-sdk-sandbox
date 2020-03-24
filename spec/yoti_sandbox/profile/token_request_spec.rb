@@ -41,7 +41,7 @@ describe 'Yoti::Sandbox::Profile::TokenRequest' do
       Yoti::Sandbox::Profile::TokenRequestBuilder.new.with_date_of_birth(Time.utc(2008, 7, 6, 0, 0), anchors: anchors).build
     end
     it 'sets a date of birth' do
-      expected = '{"remember_me_id":"","profile_attributes":[{"name":"date_of_birth","value":"2008-07-06 00:00:00 UTC","derivation":"","optional":false,"anchors":[{"type":"SOURCE","value":"","sub_type":"","timestamp":1183680000000000}]}]}'
+      expected = '{"remember_me_id":"","profile_attributes":[{"name":"date_of_birth","value":"2008-07-06","derivation":"","optional":false,"anchors":[{"type":"SOURCE","value":"","sub_type":"","timestamp":1183680000000000}]}]}'
       expect(token_request.to_json).to eql expected
     end
   end
@@ -54,7 +54,7 @@ describe 'Yoti::Sandbox::Profile::TokenRequest' do
       ).build
     end
     it 'sets an age verification' do
-      expected = '{"remember_me_id":"","profile_attributes":[{"name":"date_of_birth","value":"2008-07-06 00:00:00 UTC","derivation":"age_over:21","optional":false,"anchors":[{"type":"SOURCE","value":"","sub_type":"","timestamp":1183680000000000}]}]}'
+      expected = '{"remember_me_id":"","profile_attributes":[{"name":"date_of_birth","value":"2008-07-06","derivation":"age_over:21","optional":false,"anchors":[{"type":"SOURCE","value":"","sub_type":"","timestamp":1183680000000000}]}]}'
       expect(token_request.to_json).to eql expected
     end
   end

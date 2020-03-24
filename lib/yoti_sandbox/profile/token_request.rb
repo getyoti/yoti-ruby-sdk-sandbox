@@ -85,7 +85,7 @@ module Yoti
         def with_date_of_birth(date, optional: false, anchors: [])
           with_attribute(
             name: Yoti::Attribute::DATE_OF_BIRTH,
-            value: date.to_s,
+            value: date.strftime('%F'),
             optional: optional,
             anchors: anchors
           )
@@ -94,7 +94,7 @@ module Yoti
         def with_age_verification(dob:, derivation:, optional: false, anchors: [])
           with_attribute(
             name: Yoti::Attribute::DATE_OF_BIRTH,
-            value: dob.to_s,
+            value: dob.strftime('%F'),
             derivation: derivation,
             optional: optional,
             anchors: anchors
