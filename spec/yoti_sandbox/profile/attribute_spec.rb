@@ -26,14 +26,4 @@ describe 'Yoti::Sandbox::Profile::Attribute' do
       expect(attribute.to_json).to eql expected
     end
   end
-  describe 'self.age_over' do
-    it 'creates an age over derivation' do
-      expect(Yoti::Sandbox::Profile::Derivation.age_over(18)).to eql 'age_over:18'
-    end
-  end
-  describe 'self.age_under' do
-    it 'creates an age under derivation' do
-      expect(Yoti::Sandbox::Profile::Derivation.age_under(18)).to eql 'age_under:18'
-    end
-  end
 end

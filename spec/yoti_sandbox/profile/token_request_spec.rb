@@ -48,9 +48,11 @@ describe 'Yoti::Sandbox::Profile::TokenRequest' do
   describe '.with_age_verification' do
     let :token_request do
       Yoti::Sandbox::Profile::TokenRequestBuilder.new.with_age_verification(
-        dob: Time.utc(2008, 7, 6, 0, 0),
-        derivation: Yoti::Sandbox::Profile::Derivation.age_over(21),
-        anchors: anchors
+        Yoti::Sandbox::Profile::AgeVerificationBuilder.new
+          .with_date_of_birth(Time.utc(2008, 7, 6, 0, 0))
+          .with_age_over(21)
+          .with_anchors(anchors)
+          .build
       ).build
     end
     it 'sets an age verification' do
