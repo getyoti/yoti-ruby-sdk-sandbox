@@ -7,12 +7,10 @@ module Yoti
         def initialize(
           date_of_birth:,
           derivation:,
-          optional: false,
           anchors: []
         )
           @date_of_birth = date_of_birth
           @derivation = derivation
-          @optional = optional
           @anchors = anchors
         end
 
@@ -21,7 +19,6 @@ module Yoti
             name: Yoti::Attribute::DATE_OF_BIRTH,
             value: @date_of_birth.strftime('%F'),
             derivation: @derivation,
-            optional: @optional,
             anchors: @anchors
           )
         end
@@ -31,7 +28,6 @@ module Yoti
         def initialize
           @date_of_birth = nil
           @derivation = nil
-          @optional = false
           @anchors = []
         end
 
