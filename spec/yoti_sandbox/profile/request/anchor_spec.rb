@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Sandbox::Anchor' do
+describe 'Sandbox::Profile::Request::Anchor' do
   let :value do
     'value'
   end
@@ -14,19 +14,19 @@ describe 'Sandbox::Anchor' do
   end
   describe '.source' do
     let :anchor do
-      Sandbox::Anchor.source(value, sub_type: subtype, timestamp: timestamp)
+      Sandbox::Profile::Request::Anchor.source(value, sub_type: subtype, timestamp: timestamp)
     end
     it 'creates a source anchor' do
-      expected = '{"type":"SOURCE","value":"value","sub_type":"subtype","timestamp":1215302400}'
+      expected = '{"type":"SOURCE","value":"value","sub_type":"subtype","timestamp":1215302400000000}'
       expect(anchor.to_json).to eql expected
     end
   end
   describe '.verifier' do
     let :anchor do
-      Sandbox::Anchor.verifier(value, sub_type: subtype, timestamp: timestamp)
+      Sandbox::Profile::Request::Anchor.verifier(value, sub_type: subtype, timestamp: timestamp)
     end
     it 'creates a verifier anchor' do
-      expected = '{"type":"VERIFIER","value":"value","sub_type":"subtype","timestamp":1215302400}'
+      expected = '{"type":"VERIFIER","value":"value","sub_type":"subtype","timestamp":1215302400000000}'
       expect(anchor.to_json).to eql expected
     end
   end
