@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::Profile::Request::Attribute' do
+describe 'Yoti::Sandbox::Profile::Attribute' do
   let :name do
     'name'
   end
@@ -14,10 +14,10 @@ describe 'Yoti::Sandbox::Profile::Request::Attribute' do
   end
   describe '.with_anchor' do
     let :anchor do
-      Yoti::Sandbox::Profile::Request::Anchor.source('anchorValue', timestamp: Time.utc(2008, 7, 6, 0, 0))
+      Yoti::Sandbox::Profile::Anchor.source('anchorValue', timestamp: Time.utc(2008, 7, 6, 0, 0))
     end
     let :attribute do
-      Yoti::Sandbox::Profile::Request::Attribute.new(name: name).with_anchor(anchor)
+      Yoti::Sandbox::Profile::Attribute.new(name: name).with_anchor(anchor)
     end
     it 'adds an anchor' do
       expected = '{"name":"name","value":"","derivation":"","optional":false,"anchors":[{"type":"SOURCE","value":"anchorValue","sub_type":"","timestamp":1215302400000000}]}'
@@ -26,7 +26,7 @@ describe 'Yoti::Sandbox::Profile::Request::Attribute' do
   end
   describe '.to_json' do
     let :attribute do
-      Yoti::Sandbox::Profile::Request::Attribute.new(
+      Yoti::Sandbox::Profile::Attribute.new(
         name: name,
         value: value,
         derivation: derivation,
@@ -40,12 +40,12 @@ describe 'Yoti::Sandbox::Profile::Request::Attribute' do
   end
   describe 'self.age_over' do
     it 'creates an age over derivation' do
-      expect(Yoti::Sandbox::Profile::Request::Derivation.age_over(18)).to eql 'age_over:18'
+      expect(Yoti::Sandbox::Profile::Derivation.age_over(18)).to eql 'age_over:18'
     end
   end
   describe 'self.age_under' do
     it 'creates an age under derivation' do
-      expect(Yoti::Sandbox::Profile::Request::Derivation.age_under(18)).to eql 'age_under:18'
+      expect(Yoti::Sandbox::Profile::Derivation.age_under(18)).to eql 'age_under:18'
     end
   end
 end
