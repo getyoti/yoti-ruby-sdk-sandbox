@@ -4,12 +4,12 @@ require 'spec_helper'
 
 default_base_url = 'https://api.yoti.com/sandbox/v1'
 
-describe 'Sandbox::Profile::Client' do
+describe 'Yoti::Sandbox::Profile::Client' do
   let :profile do
     {}
   end
   let :client do
-    Sandbox::Profile::Client.new
+    Yoti::Sandbox::Profile::Client.new
   end
   context 'with a valid profile payload' do
     before(:context) do
@@ -42,7 +42,7 @@ describe 'Sandbox::Profile::Client' do
   end
   context 'with a custom base url' do
     let :client do
-      Sandbox::Profile::Client.new(base_url: 'https://www.example.com')
+      Yoti::Sandbox::Profile::Client.new(base_url: 'https://www.example.com')
     end
     before(:context) do
       base_url = 'https://www.example.com'
