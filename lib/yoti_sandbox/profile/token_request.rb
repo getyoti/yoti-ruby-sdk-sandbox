@@ -248,10 +248,25 @@ module Yoti
         # @return [self]
         #
         def with_selfie(data, optional: false, anchors: [])
+          with_base64_selfie(
+            Base64.strict_encode64(data),
+            optional: optional,
+            anchors: anchors
+          )
+        end
+
+        #
+        # @param [String] base64_data
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
+        def with_base64_selfie(base64_data, optional: false, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::SELFIE,
-              value: Base64.strict_encode64(data),
+              value: base64_data,
               optional: optional,
               anchors: anchors
             )
