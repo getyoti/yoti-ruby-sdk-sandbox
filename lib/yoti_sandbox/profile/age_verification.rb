@@ -74,7 +74,7 @@ module Yoti
         # @return [self]
         #
         def with_age_over(age)
-          with_derivation("age_over:#{age}")
+          with_derivation("#{Yoti::Attribute::AGE_OVER}#{age}")
         end
 
         #
@@ -83,7 +83,7 @@ module Yoti
         # @return [self]
         #
         def with_age_under(age)
-          with_derivation("age_under:#{age}")
+          with_derivation("#{Yoti::Attribute::AGE_UNDER}#{age}")
         end
 
         #
