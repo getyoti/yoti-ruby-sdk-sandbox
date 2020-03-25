@@ -3,7 +3,17 @@
 module Yoti
   module Sandbox
     module Profile
+      #
+      # Represents an attribute that can be used by the profile sandbox service
+      #
       class Attribute
+        #
+        # @param [String] name
+        # @param [String] value
+        # @param [String] derivation
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
         def initialize(
           name: '',
           value: '',
@@ -18,6 +28,9 @@ module Yoti
           @anchors = anchors
         end
 
+        #
+        # @return [Hash]
+        #
         def as_json(*_args)
           {
             name: @name,
@@ -28,6 +41,9 @@ module Yoti
           }
         end
 
+        #
+        # @return [String]
+        #
         def to_json(*args)
           as_json(*args).to_json
         end

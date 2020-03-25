@@ -3,7 +3,18 @@
 module Yoti
   module Sandbox
     module Profile
+      #
+      # Represents an Age Verification attribute that can be
+      # used by the profile sandbox service
+      #
       class AgeVerification
+        #
+        # @param [DateTime|Time] date_of_birth
+        # @param [String] derivation
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def initialize(
           date_of_birth:,
           derivation:,
@@ -14,6 +25,9 @@ module Yoti
           @anchors = anchors
         end
 
+        #
+        # @return [Attribute]
+        #
         def to_attribute
           Attribute.new(
             name: Yoti::Attribute::DATE_OF_BIRTH,
@@ -24,6 +38,9 @@ module Yoti
         end
       end
 
+      #
+      # Builder for {AgeVerification}
+      #
       class AgeVerificationBuilder
         def initialize
           @date_of_birth = nil
@@ -31,29 +48,57 @@ module Yoti
           @anchors = []
         end
 
+        #
+        # @param [DateTime|Time] date_of_birth
+        #
+        # @return [self]
+        #
         def with_date_of_birth(date_of_birth)
           @date_of_birth = date_of_birth
           self
         end
 
+        #
+        # @param [String] derivation
+        #
+        # @return [self]
+        #
         def with_derivation(derivation)
           @derivation = derivation
           self
         end
 
+        #
+        # @param [Integer] age
+        #
+        # @return [self]
+        #
         def with_age_over(age)
           with_derivation("age_over:#{age}")
         end
 
+        #
+        # @param [Integer] age
+        #
+        # @return [self]
+        #
         def with_age_under(age)
           with_derivation("age_under:#{age}")
         end
 
+        #
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_anchors(anchors)
           @anchors = anchors
           self
         end
 
+        #
+        # @return [AgeVerification]
+        #
         def build
           AgeVerification.new(
             date_of_birth: @date_of_birth,
