@@ -30,4 +30,16 @@ describe 'Yoti::Sandbox::Profile::Anchor' do
       expect(anchor.to_json).to eql expected
     end
   end
+  describe 'with DateTime object' do
+    let :timestamp do
+      DateTime.new(2010, 7, 6, 0, 0)
+    end
+    let :anchor do
+      Yoti::Sandbox::Profile::Anchor.new(value: value, type: 'some_type', timestamp: timestamp)
+    end
+    it 'creates a source anchor' do
+      expected = '{"type":"some_type","value":"value","sub_type":"","timestamp":1278374400000000}'
+      expect(anchor.to_json).to eql expected
+    end
+  end
 end

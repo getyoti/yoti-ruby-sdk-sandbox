@@ -9,12 +9,22 @@ require_relative 'attribute'
 module Yoti
   module Sandbox
     module Profile
+      #
+      # TokenRequest used to retrieve a token from the profile sandbox service
+      #
       class TokenRequest
+        #
+        # @param [String] remember_me_id
+        # @param [Array<Attribute>] attributes
+        #
         def initialize(remember_me_id, attributes)
           @remember_me_id = remember_me_id
           @attributes = attributes
         end
 
+        #
+        # @return [Hash]
+        #
         def as_json(*_args)
           {
             remember_me_id: @remember_me_id,
@@ -22,27 +32,50 @@ module Yoti
           }
         end
 
+        #
+        # @return [String]
+        #
         def to_json(*_args)
           as_json.to_json
         end
       end
 
+      #
+      # Builder for {TokenRequest}
+      #
       class TokenRequestBuilder
         def initialize
           @remember_me_id = ''
           @attributes = []
         end
 
-        def with_remember_me_id(id)
-          @remember_me_id = id
+        #
+        # @param [String] remember_me_id
+        #
+        # @return [self]
+        #
+        def with_remember_me_id(remember_me_id)
+          @remember_me_id = remember_me_id
           self
         end
 
+        #
+        # @param [Attribute] attribute
+        #
+        # @return [self]
+        #
         def with_attribute(attribute)
           @attributes.push attribute
           self
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_given_names(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -54,6 +87,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_family_name(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -65,6 +105,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_full_name(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -76,6 +123,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [DateTime|Time] date
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_date_of_birth(date, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -87,10 +141,22 @@ module Yoti
           )
         end
 
+        #
+        # @param [AgeVerification] age_verification
+        #
+        # @return [self]
+        #
         def with_age_verification(age_verification)
           with_attribute(age_verification.to_attribute)
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_gender(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -102,6 +168,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_phone_number(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -113,6 +186,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_nationality(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -124,6 +204,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_postal_address(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -135,6 +222,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [Hash] data
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_structured_postal_address(data, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -146,6 +240,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [bin] data
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_selfie(data, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -157,6 +258,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_email_address(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -168,6 +276,13 @@ module Yoti
           )
         end
 
+        #
+        # @param [String] value
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
         def with_document_details(value, optional: false, anchors: [])
           with_attribute(
             create_attribute(
@@ -179,12 +294,24 @@ module Yoti
           )
         end
 
+        #
+        # @return [TokenRequest]
+        #
         def build
           TokenRequest.new(@remember_me_id, @attributes)
         end
 
         private
 
+        #
+        # @param [String] name
+        # @param [String] value
+        # @param [String] derivation
+        # @param [Boolean] optional
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [Attribute]
+        #
         def create_attribute(
           name:,
           value:,
