@@ -22,7 +22,6 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
         name: 'date_of_birth',
         value: '2008-07-06',
         derivation: 'age_over:21',
-        optional: false,
         anchors: []
       }.to_json
       expect(age_verification.to_attribute.to_json).to eql expected
@@ -41,7 +40,6 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
         name: 'date_of_birth',
         value: '2008-07-06',
         derivation: 'age_under:18',
-        optional: false,
         anchors: []
       }.to_json
       expect(age_verification.to_attribute.to_json).to eql expected
@@ -68,7 +66,6 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
         name: 'date_of_birth',
         value: '2008-07-06',
         derivation: 'age_over:21',
-        optional: false,
         anchors: [
           {
             type: 'SOURCE',

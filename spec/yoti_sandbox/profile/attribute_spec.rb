@@ -17,12 +17,11 @@ describe 'Yoti::Sandbox::Profile::Attribute' do
       Yoti::Sandbox::Profile::Attribute.new(
         name: name,
         value: value,
-        derivation: derivation,
-        optional: true
+        derivation: derivation
       )
     end
     it 'Marshals the attribute' do
-      expected = '{"name":"name","value":"value","derivation":"derivation","optional":true,"anchors":[]}'
+      expected = '{"name":"name","value":"value","derivation":"derivation","anchors":[]}'
       expect(attribute.to_json).to eql expected
     end
   end
