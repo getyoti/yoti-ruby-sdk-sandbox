@@ -71,17 +71,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_given_names(value, optional: false, anchors: [])
+        def with_given_names(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::GIVEN_NAMES,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -89,17 +87,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_family_name(value, optional: false, anchors: [])
+        def with_family_name(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::FAMILY_NAME,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -107,17 +103,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_full_name(value, optional: false, anchors: [])
+        def with_full_name(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::FULL_NAME,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -125,17 +119,15 @@ module Yoti
 
         #
         # @param [DateTime|Time] date
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_date_of_birth(date, optional: false, anchors: [])
+        def with_date_of_birth(date, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::DATE_OF_BIRTH,
               value: date.strftime('%F'),
-              optional: optional,
               anchors: anchors
             )
           )
@@ -152,17 +144,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_gender(value, optional: false, anchors: [])
+        def with_gender(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::GENDER,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -170,17 +160,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_phone_number(value, optional: false, anchors: [])
+        def with_phone_number(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::PHONE_NUMBER,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -188,17 +176,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_nationality(value, optional: false, anchors: [])
+        def with_nationality(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::NATIONALITY,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -206,17 +192,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_postal_address(value, optional: false, anchors: [])
+        def with_postal_address(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::POSTAL_ADDRESS,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -224,17 +208,15 @@ module Yoti
 
         #
         # @param [Hash] data
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_structured_postal_address(data, optional: false, anchors: [])
+        def with_structured_postal_address(data, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::STRUCTURED_POSTAL_ADDRESS,
               value: data.to_json,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -242,32 +224,28 @@ module Yoti
 
         #
         # @param [bin] data
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_selfie(data, optional: false, anchors: [])
+        def with_selfie(data, anchors: [])
           with_base64_selfie(
             Base64.strict_encode64(data),
-            optional: optional,
             anchors: anchors
           )
         end
 
         #
         # @param [String] base64_data
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_base64_selfie(base64_data, optional: false, anchors: [])
+        def with_base64_selfie(base64_data, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::SELFIE,
               value: base64_data,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -275,17 +253,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_email_address(value, optional: false, anchors: [])
+        def with_email_address(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::EMAIL_ADDRESS,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -293,17 +269,15 @@ module Yoti
 
         #
         # @param [String] value
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [self]
         #
-        def with_document_details(value, optional: false, anchors: [])
+        def with_document_details(value, anchors: [])
           with_attribute(
             create_attribute(
               name: Yoti::Attribute::DOCUMENT_DETAILS,
               value: value,
-              optional: optional,
               anchors: anchors
             )
           )
@@ -322,7 +296,6 @@ module Yoti
         # @param [String] name
         # @param [String] value
         # @param [String] derivation
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         # @return [Attribute]
@@ -331,14 +304,12 @@ module Yoti
           name:,
           value:,
           derivation: '',
-          optional: false,
           anchors: []
         )
           Yoti::Sandbox::Profile::Attribute.new(
             name: name,
             value: value,
             derivation: derivation,
-            optional: optional,
             anchors: anchors
           )
         end

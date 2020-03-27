@@ -11,20 +11,17 @@ module Yoti
         # @param [String] name
         # @param [String] value
         # @param [String] derivation
-        # @param [Boolean] optional
         # @param [Array<Anchor>] anchors
         #
         def initialize(
           name: '',
           value: '',
           derivation: '',
-          optional: false,
           anchors: []
         )
           @name = name
           @value = value
           @derivation = derivation
-          @optional = optional
           @anchors = anchors
         end
 
@@ -36,7 +33,6 @@ module Yoti
             name: @name,
             value: @value,
             derivation: @derivation,
-            optional: @optional,
             anchors: @anchors.map(&:as_json)
           }
         end
