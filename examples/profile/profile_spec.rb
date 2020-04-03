@@ -73,7 +73,7 @@ describe 'sandbox example' do
     expect(profile.selfie.value).to eql('Some Selfie')
     expect(profile.email_address.value).to eql('some@email.address')
 
-    document_details = profile.document_details.value;
+    document_details = profile.document_details.value
     expect(document_details.type).to eql('PASSPORT')
     expect(document_details.issuing_country).to eql('USA')
     expect(document_details.document_number).to eql('1234abc')

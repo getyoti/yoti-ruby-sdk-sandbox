@@ -10,6 +10,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - spec/**/**/*.rb
+    - examples/**/*.rb
 
 Metrics/ClassLength:
   Enabled: false
@@ -37,3 +38,7 @@ Style/NumericLiterals:
 
 Style/MutableConstant:
   Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - examples/**/*.rb
