@@ -30,48 +30,16 @@ gem install yoti_sandbox
 
 Please do not open the pem file as this might corrupt the key and you will need to create a new application.
 
-## Profile Token Creation
-
 ```ruby
-require 'yoti'
 require 'yoti_sandbox'
-require 'base64'
 
 Yoti.configure do |config|
   config.client_sdk_id = 'SANDBOX_CLIENT_SDK_ID'
   config.key_file_path = '/path/to/your-pem-file.pem'
   config.api_endpoint = 'https://api.yoti.com/sandbox/v1'
 end
-
-age_verification = Yoti::Sandbox::Profile::AgeVerificationBuilder
-  .new
-  .with_date_of_birth(DateTime.new(1989, 1, 2))
-  .with_age_over(18)
-  .build
-
-token_request = Yoti::Sandbox::Profile::TokenRequestBuilder
-  .new
-  .with_remember_me_id('some_remember_me_id')
-  .with_given_names('Some Given Names')
-  .with_family_name('Some Family Name')
-  .with_full_name('Some Full Name')
-  .with_date_of_birth(DateTime.new(1989, 1, 2))
-  .with_age_verification(age_verification)
-  .with_gender('Some Gender')
-  .with_phone_number('Some Phone Number')
-  .with_nationality('Some Nationality')
-  .with_postal_address('Some Postal Address')
-  .with_structured_postal_address({
-    building_number: 1,
-    address_line1: 'Some Address'
-  })
-  .with_base64_selfie(Base64.strict_encode64('Some Base64 Encoded Selfie'))
-  .with_email_address('Some Email Address')
-  .with_document_details('PASSPORT USA 1234abc')
-  .build
-
-sandboxClient = Yoti::Sandbox::Profile::Client.new
-token = sandboxClient.setup_sharing_profile(token_request)
-
-activityDetails = Yoti::Client.get_activity_details(token)
 ```
+
+## Examples
+
+- See [examples/profile](examples/profile) for a general example of how to use the Profile Sandbox in your tests.
