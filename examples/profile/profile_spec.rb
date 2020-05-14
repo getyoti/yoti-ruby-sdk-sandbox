@@ -20,35 +20,35 @@ describe 'sandbox example' do
       Yoti::Sandbox::Profile::Anchor.verifier('YOTI_ADMIN')
     ]
 
-    age_verification = Yoti::Sandbox::Profile::AgeVerification
-      .builder
-      .with_date_of_birth(DateTime.new(1989, 1, 2))
-      .with_age_over(18)
-      .build
+    age_verification = Yoti::Sandbox::Profile::AgeVerificationBuilder
+                       .new
+                       .with_date_of_birth(DateTime.new(1989, 1, 2))
+                       .with_age_over(18)
+                       .build
 
-    token_request = Yoti::Sandbox::Profile::TokenRequest
-      .builder
-      .with_remember_me_id('some_remember_me_id')
-      .with_given_names('Some Given Names', anchors: anchors)
-      .with_family_name('Some Family Name', anchors: anchors)
-      .with_full_name('Some Full Name', anchors: anchors)
-      .with_date_of_birth(DateTime.new(1989, 1, 2), anchors: anchors)
-      .with_age_verification(age_verification)
-      .with_gender('Some Gender', anchors: anchors)
-      .with_phone_number('Some Phone Number')
-      .with_nationality('Some Nationality', anchors: anchors)
-      .with_postal_address('Some Postal Address')
-      .with_structured_postal_address(
-        {
-          'building_number' => 1,
-          'address_line1' => 'Some Address'
-        },
-        anchors: anchors
-      )
-      .with_base64_selfie(Base64.strict_encode64('Some Selfie'))
-      .with_email_address('some@email.address')
-      .with_document_details('PASSPORT USA 1234abc', anchors: anchors)
-      .build
+    token_request = Yoti::Sandbox::Profile::TokenRequestBuilder
+                    .new
+                    .with_remember_me_id('some_remember_me_id')
+                    .with_given_names('Some Given Names', anchors: anchors)
+                    .with_family_name('Some Family Name', anchors: anchors)
+                    .with_full_name('Some Full Name', anchors: anchors)
+                    .with_date_of_birth(DateTime.new(1989, 1, 2), anchors: anchors)
+                    .with_age_verification(age_verification)
+                    .with_gender('Some Gender', anchors: anchors)
+                    .with_phone_number('Some Phone Number')
+                    .with_nationality('Some Nationality', anchors: anchors)
+                    .with_postal_address('Some Postal Address')
+                    .with_structured_postal_address(
+                      {
+                        'building_number' => 1,
+                        'address_line1' => 'Some Address'
+                      },
+                      anchors: anchors
+                    )
+                    .with_base64_selfie(Base64.strict_encode64('Some Selfie'))
+                    .with_email_address('some@email.address')
+                    .with_document_details('PASSPORT USA 1234abc', anchors: anchors)
+                    .build
 
     sandbox_client = Yoti::Sandbox::Profile::Client.new
     token = sandbox_client.setup_sharing_profile(token_request)
