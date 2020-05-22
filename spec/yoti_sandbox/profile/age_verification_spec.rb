@@ -14,7 +14,7 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
       Yoti::Sandbox::Profile::AgeVerificationBuilder
         .new
         .with_date_of_birth(date_of_birth)
-        .with_age_over(21)
+        .with_age_over(age)
         .build
     end
     it 'Marshals the attribute with age over derivation' do
