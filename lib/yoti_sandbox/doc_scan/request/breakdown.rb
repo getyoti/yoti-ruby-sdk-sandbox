@@ -5,15 +5,6 @@ module Yoti
     module DocScan
       module Request
         class Breakdown
-          # @return [String]
-          attr_reader :sub_check
-
-          # @return [String]
-          attr_reader :result
-
-          # @return [Array<Detail>]
-          attr_reader :details
-
           #
           # @param [String] sub_check
           # @param [String] result
@@ -91,7 +82,7 @@ module Yoti
           end
 
           #
-          # @return [BreakdownBuilder]
+          # @return [Breakdown]
           #
           def build
             Validation.assert_not_nil(@sub_check, 'sub_check')
