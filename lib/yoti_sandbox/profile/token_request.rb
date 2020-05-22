@@ -23,6 +23,13 @@ module Yoti
         end
 
         #
+        # @return [TokenRequestBuilder]
+        #
+        def self.builder
+          TokenRequestBuilder.new
+        end
+
+        #
         # @return [Hash]
         #
         def as_json(*_args)
