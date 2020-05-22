@@ -5,6 +5,10 @@ module Yoti
     module DocScan
       module Request
         class DocumentCheck < Check
+          #
+          # @param [CheckResult] result
+          # @param [DocumentFilter] document_filter
+          #
           def initialize(result, document_filter)
             raise(TypeError, "#{self.class} cannot be instantiated") if self.class == DocumentCheck
 
@@ -16,7 +20,7 @@ module Yoti
 
           def as_json(*_args)
             json = super
-            json['document_filter'] = @document_filter.as_json unless @document_filter.nil?
+            json[:document_filter] = @document_filter.as_json unless @document_filter.nil?
             json
           end
         end
