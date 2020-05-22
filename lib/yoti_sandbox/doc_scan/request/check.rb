@@ -5,6 +5,9 @@ module Yoti
     module DocScan
       module Request
         class Check
+          #
+          # @param [CheckResult] result
+          #
           def initialize(result)
             raise(TypeError, "#{self.class} cannot be instantiated") if self.class == Check
 

@@ -5,15 +5,6 @@ module Yoti
     module DocScan
       module Request
         class Recommendation
-          # @return [String]
-          attr_reader :value
-
-          # @return [String]
-          attr_reader :reason
-
-          # @return [Array<Detail>]
-          attr_reader :recovery_suggestion
-
           #
           # @param [String] value
           # @param [String] reason
