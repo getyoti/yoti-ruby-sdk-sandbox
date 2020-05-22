@@ -7,6 +7,7 @@ $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'webmock/rspec'
 
 require 'yoti_sandbox/profile'
+require 'yoti_sandbox/doc_scan'
 
 RSpec.configure do |config|
   config.before do
