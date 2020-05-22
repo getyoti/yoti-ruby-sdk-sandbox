@@ -55,18 +55,34 @@ module Yoti
             @details = []
           end
 
+          #
+          # @param [String] sub_check
+          #
+          # @return [self]
+          #
           def with_sub_check(sub_check)
             Validation.assert_is_a(String, sub_check, 'sub_check')
             @sub_check = sub_check
             self
           end
 
+          #
+          # @param [String] result
+          #
+          # @return [self]
+          #
           def with_result(result)
             Validation.assert_is_a(String, result, 'result')
             @result = result
             self
           end
 
+          #
+          # @param [String] name
+          # @param [String] value
+          #
+          # @return [self]
+          #
           def with_detail(name, value)
             Validation.assert_is_a(String, name, 'name')
             Validation.assert_is_a(String, value, 'value')
@@ -74,6 +90,9 @@ module Yoti
             self
           end
 
+          #
+          # @return [BreakdownBuilder]
+          #
           def build
             Validation.assert_not_nil(@sub_check, 'sub_check')
             Validation.assert_not_nil(@result, 'result')
