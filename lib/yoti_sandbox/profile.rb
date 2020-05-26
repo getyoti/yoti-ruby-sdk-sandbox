@@ -1,3 +1,5 @@
+require 'yoti'
+
 require_relative 'profile/age_verification'
 require_relative 'profile/anchor'
 require_relative 'profile/attribute'

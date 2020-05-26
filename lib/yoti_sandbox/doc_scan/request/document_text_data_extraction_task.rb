@@ -12,10 +12,23 @@ module Yoti
           def initialize(result, document_filter)
             raise(TypeError, "#{self.class} cannot be instantiated") if self.class == DocumentCheck
 
-            super(result)
+            Validation.assert_is_a(DocumentTextDataExtractionTaskResult, result, 'result')
+            @result = result
 
             Validation.assert_is_a(DocumentFilter, document_filter, 'document_filter', true)
             @document_filter = document_filter
+          end
+
+          def to_json(*_args)
+            as_json.to_json
+          end
+
+          def as_json(*_args)
+            json = {
+              result: @result.as_json
+            }
+            json[:document_filter] = @document_filter.as_json unless @document_filter.nil?
+            json
           end
 
           #
@@ -28,12 +41,9 @@ module Yoti
 
         class DocumentTextDataExtractionTaskResult
           #
-          # @param [CheckReport] report
           # @param [Hash] document_fields
           #
-          def initialize(report, document_fields)
-            super(report)
-
+          def initialize(document_fields)
             Validation.assert_is_a(Hash, document_fields, 'document_fields')
             document_fields.each { |_k, v| Validation.assert_is_a(String, v, 'document_fields value') }
             @document_fields = document_fields
@@ -44,9 +54,9 @@ module Yoti
           end
 
           def as_json(*_args)
-            super.as_json.merge(
+            {
               document_fields: @document_fields
-            ).compact
+            }
           end
         end
 
@@ -93,8 +103,7 @@ module Yoti
           # @return [DocumentTextDataExtractionTask]
           #
           def build
-            report = CheckReport.new(@recommendation, @breakdowns)
-            result = DocumentTextDataExtractionTaskResult.new(report, @document_fields)
+            result = DocumentTextDataExtractionTaskResult.new(@document_fields)
             DocumentTextDataExtractionTask.new(result, @document_filter)
           end
         end
