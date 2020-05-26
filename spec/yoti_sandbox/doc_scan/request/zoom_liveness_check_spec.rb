@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
+describe 'Yoti::Sandbox::DocScan::Request::ZoomLivenessCheck' do
   let :some_breakdown do
     Yoti::Sandbox::DocScan::Request::Breakdown
       .builder
@@ -18,24 +18,16 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
       .build
   end
 
-  context 'when document filter is provided' do
-    let :some_filter do
-      Yoti::Sandbox::DocScan::Request::DocumentFilter
-        .builder
-        .with_country_code('some-code')
-        .build
-    end
-
+  context 'when breakdown is provided' do
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::ZoomLivenessCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
-        .with_document_filter(some_filter)
         .build
     end
 
-    it 'serializes with document filter' do
+    it 'serializes correctly' do
       expected = {
         'result' => {
           'report' => {
@@ -43,7 +35,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
             'breakdown' => [some_breakdown.as_json]
           }
         },
-        'document_filter' => some_filter.as_json
+        'liveness_type' => 'ZOOM'
       }
 
       expect(check.to_json).to eql expected.to_json
@@ -60,7 +52,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::ZoomLivenessCheck
         .builder
         .with_breakdowns([some_breakdown, some_other_breakdown])
         .with_recommendation(some_recommendation)
@@ -77,7 +69,8 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
               some_other_breakdown.as_json
             ]
           }
-        }
+        },
+        'liveness_type' => 'ZOOM'
       }
 
       expect(check.to_json).to eql expected.to_json

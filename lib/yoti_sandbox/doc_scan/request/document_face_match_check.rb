@@ -4,23 +4,23 @@ module Yoti
   module Sandbox
     module DocScan
       module Request
-        class DocumentAuthenticityCheck < DocumentCheck
+        class DocumentFaceMatchCheck < DocumentCheck
           #
-          # @return [DocumentAuthenticityCheckBuilder]
+          # @return [DocumentFaceMatchCheckBuilder]
           #
           def self.builder
-            DocumentAuthenticityCheckBuilder.new
+            DocumentFaceMatchCheckBuilder.new
           end
         end
 
-        class DocumentAuthenticityCheckBuilder < DocumentCheckBuilder
+        class DocumentFaceMatchCheckBuilder < DocumentCheckBuilder
           #
-          # @return [DocumentAuthenticityCheck]
+          # @return [DocumentFaceMatchCheck]
           #
           def build
             report = CheckReport.new(@recommendation, @breakdowns)
             result = CheckResult.new(report)
-            DocumentAuthenticityCheck.new(result, @document_filter)
+            DocumentFaceMatchCheck.new(result, @document_filter)
           end
         end
       end

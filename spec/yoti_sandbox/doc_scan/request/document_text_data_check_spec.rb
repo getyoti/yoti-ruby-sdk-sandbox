@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
+describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
   let :some_breakdown do
     Yoti::Sandbox::DocScan::Request::Breakdown
       .builder
@@ -27,7 +27,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
@@ -41,9 +41,68 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
           'report' => {
             'recommendation' => some_recommendation.as_json,
             'breakdown' => [some_breakdown.as_json]
-          }
+          },
+          'document_fields' => {}
         },
         'document_filter' => some_filter.as_json
+      }
+
+      expect(check.to_json).to eql expected.to_json
+    end
+  end
+
+  context 'when document fields are provided' do
+    let :some_document_fields do
+      {
+        'some' => 'field'
+      }
+    end
+
+    let :check do
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+        .builder
+        .with_breakdown(some_breakdown)
+        .with_recommendation(some_recommendation)
+        .with_document_fields(some_document_fields)
+        .build
+    end
+
+    it 'serializes with document fields' do
+      expected = {
+        'result' => {
+          'report' => {
+            'recommendation' => some_recommendation.as_json,
+            'breakdown' => [some_breakdown.as_json]
+          },
+          'document_fields' => some_document_fields
+        }
+      }
+
+      expect(check.to_json).to eql expected.to_json
+    end
+  end
+
+  context 'when document field is provided' do
+    let :check do
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+        .builder
+        .with_breakdown(some_breakdown)
+        .with_recommendation(some_recommendation)
+        .with_document_field('some', 'field')
+        .build
+    end
+
+    it 'serializes with document field' do
+      expected = {
+        'result' => {
+          'report' => {
+            'recommendation' => some_recommendation.as_json,
+            'breakdown' => [some_breakdown.as_json]
+          },
+          'document_fields' => {
+            'some' => 'field'
+          }
+        }
       }
 
       expect(check.to_json).to eql expected.to_json
@@ -60,7 +119,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
         .builder
         .with_breakdowns([some_breakdown, some_other_breakdown])
         .with_recommendation(some_recommendation)
@@ -76,7 +135,8 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
               some_breakdown.as_json,
               some_other_breakdown.as_json
             ]
-          }
+          },
+          'document_fields' => {}
         }
       }
 

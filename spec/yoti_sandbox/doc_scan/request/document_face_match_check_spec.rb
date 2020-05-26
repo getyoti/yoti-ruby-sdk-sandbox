@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
+describe 'Yoti::Sandbox::DocScan::Request::DocumentFaceMatchCheck' do
   let :some_breakdown do
     Yoti::Sandbox::DocScan::Request::Breakdown
       .builder
@@ -27,7 +27,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::DocumentFaceMatchCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
@@ -60,7 +60,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentAuthenticityCheck
+      Yoti::Sandbox::DocScan::Request::DocumentFaceMatchCheck
         .builder
         .with_breakdowns([some_breakdown, some_other_breakdown])
         .with_recommendation(some_recommendation)
