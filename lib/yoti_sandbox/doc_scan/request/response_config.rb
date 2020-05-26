@@ -30,12 +30,9 @@ module Yoti
 
           def as_json(*_args)
             {
-              Yoti::DocScan::Constants::ID_DOCUMENT_TEXT_DATA_CHECK => @document_text_data_checks,
-              Yoti::DocScan::Constants::ID_DOCUMENT_AUTHENTICITY => @document_authenticity_checks,
-              Yoti::DocScan::Constants::ID_DOCUMENT_FACE_MATCH => @document_face_match_checks,
-              Yoti::DocScan::Constants::LIVENESS => @liveness_checks,
-              :async_report_delay => @async_report_delay
-            }
+              task_results: @task_results,
+              check_reports: @check_reports
+            }.compact
           end
         end
 
