@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'yoti'
-require 'securerandom'
-
 module Yoti
   module Sandbox
     module Profile
