@@ -19,35 +19,25 @@ module Yoti
         # @param [Yoti::SandboxDocScan::Request::ResponseConfig] response_config
         #
         def configure_session_response(session_id, response_config)
-          configure_response(
-            "sessions/#{session_id}/response-config",
-            response_config
-          )
+          request = Yoti::Request.new
+          request.base_url = @base_url
+          request.endpoint = "sessions/#{session_id}/response-config"
+          request.http_method = 'PUT'
+          request.payload = response_config
+          request.query_params = { sdkId: Yoti.configuration.client_sdk_id }
+          request.execute
         end
 
         #
         # @param [Yoti::SandboxDocScan::Request::ResponseConfig] response_config
         #
         def configure_application_response(response_config)
-          configure_response(
-            "apps/#{Yoti.configuration.client_sdk_id}/response-config",
-            response_config
-          )
-        end
-
-        private
-
-        #
-        # @param [String] endpoint
-        # @param [Yoti::SandboxDocScan::Request::ResponseConfig] response_config
-        #
-        def configure_response(endpoint, response_config)
           request = Yoti::Request.new
           request.base_url = @base_url
-          request.endpoint = endpoint
+          request.endpoint = "apps/#{Yoti.configuration.client_sdk_id}/response-config"
           request.http_method = 'PUT'
           request.payload = response_config
-          request.query_params = { sdkId: Yoti.configuration.client_sdk_id }
+          request.query_params = {}
           request.execute
         end
       end
