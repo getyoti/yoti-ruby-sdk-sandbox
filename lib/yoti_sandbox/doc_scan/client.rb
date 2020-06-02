@@ -19,26 +19,29 @@ module Yoti
         # @param [Yoti::SandboxDocScan::Request::ResponseConfig] response_config
         #
         def configure_session_response(session_id, response_config)
-          request = Yoti::Request.new
-          request.base_url = @base_url
-          request.endpoint = "sessions/#{session_id}/response-config"
-          request.http_method = 'PUT'
-          request.payload = response_config
-          request.query_params = { sdkId: Yoti.configuration.client_sdk_id }
-          request.execute
+          Yoti::Request
+            .builder
+            .with_http_method('PUT')
+            .with_base_url(@base_url)
+            .with_endpoint("sessions/#{session_id}/response-config")
+            .with_query_param('sdkId', Yoti.configuration.client_sdk_id)
+            .with_payload(response_config)
+            .build
+            .execute
         end
 
         #
         # @param [Yoti::SandboxDocScan::Request::ResponseConfig] response_config
         #
         def configure_application_response(response_config)
-          request = Yoti::Request.new
-          request.base_url = @base_url
-          request.endpoint = "apps/#{Yoti.configuration.client_sdk_id}/response-config"
-          request.http_method = 'PUT'
-          request.payload = response_config
-          request.query_params = {}
-          request.execute
+          Yoti::Request
+            .builder
+            .with_http_method('PUT')
+            .with_base_url(@base_url)
+            .with_endpoint("apps/#{Yoti.configuration.client_sdk_id}/response-config")
+            .with_payload(response_config)
+            .build
+            .execute
         end
       end
     end
