@@ -20,14 +20,15 @@ module Yoti
         # @return [String]
         #
         def setup_sharing_profile(token_request)
-          request = Yoti::Request.new
-          request.base_url = @base_url
-          request.endpoint = "apps/#{Yoti.configuration.client_sdk_id}/tokens"
-          request.http_method = 'POST'
-          request.payload = token_request
-          request.query_params = {}
+          request = Yoti::Request
+                    .builder
+                    .with_base_url(@base_url)
+                    .with_endpoint("apps/#{Yoti.configuration.client_sdk_id}/tokens")
+                    .with_http_method('POST')
+                    .with_payload(token_request)
+                    .build
 
-          JSON.parse(request.body)['token']
+          JSON.parse(request.execute.body)['token']
         end
       end
     end
