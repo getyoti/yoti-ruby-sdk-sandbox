@@ -48,4 +48,5 @@ end
 
 ## Examples
 
-- See [examples/profile](examples/profile) for a general example of how to use the Profile Sandbox in your tests.
+- [Profile Sandbox](examples/profile)
+- [Doc Scan Sandbox](examples/doc_scan)
