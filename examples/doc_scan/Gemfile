@@ -7,9 +7,4 @@ gem 'dotenv', '~> 2.5'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.8'
 gem 'selenium-webdriver', '~> 3.142'
-
-# Sandbox relies on latest SDK
-# @TODO release SDK 1.7.0
-gem 'yoti', git: 'https://github.com/getyoti/yoti-ruby-sdk', branch: 'SDK-1302-doc-scan'
-
 gem 'yoti_sandbox', path: '../..'
