@@ -26,6 +26,13 @@ module Yoti
         end
 
         #
+        # @return [AgeVerificationBuilder]
+        #
+        def self.builder
+          AgeVerificationBuilder.new
+        end
+
+        #
         # @return [Attribute]
         #
         def to_attribute

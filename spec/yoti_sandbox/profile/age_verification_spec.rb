@@ -11,10 +11,10 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
   end
   describe '.with_age_over' do
     let :age_verification do
-      Yoti::Sandbox::Profile::AgeVerificationBuilder
-        .new
+      Yoti::Sandbox::Profile::AgeVerification
+        .builder
         .with_date_of_birth(date_of_birth)
-        .with_age_over(21)
+        .with_age_over(age)
         .build
     end
     it 'Marshals the attribute with age over derivation' do
@@ -29,8 +29,8 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
   end
   describe '.with_age_under' do
     let :age_verification do
-      Yoti::Sandbox::Profile::AgeVerificationBuilder
-        .new
+      Yoti::Sandbox::Profile::AgeVerification
+        .builder
         .with_date_of_birth(date_of_birth)
         .with_age_under(18)
         .build
@@ -47,8 +47,8 @@ describe 'Yoti::Sandbox::Profile::AgeVerification' do
   end
   describe '.with_anchors' do
     let :age_verification do
-      Yoti::Sandbox::Profile::AgeVerificationBuilder
-        .new
+      Yoti::Sandbox::Profile::AgeVerification
+        .builder
         .with_date_of_birth(date_of_birth)
         .with_age_over(21)
         .with_anchors(

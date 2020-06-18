@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+require 'cucumber'
+require 'cucumber/rake/task'
+
+################################
+# Tests                        #
+################################
+
+Cucumber::Rake::Task.new(:cucumber) do |t|
+  t.cucumber_opts = 'features --format pretty'
+end
+
+################################
+# Defaults                     #
+################################
+
+task default: %i[cucumber]

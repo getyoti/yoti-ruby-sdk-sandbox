@@ -20,12 +20,14 @@ describe 'sandbox example' do
       Yoti::Sandbox::Profile::Anchor.verifier('YOTI_ADMIN')
     ]
 
-    age_verification = Yoti::Sandbox::Profile::AgeVerificationBuilder.new
+    age_verification = Yoti::Sandbox::Profile::AgeVerification
+      .builder
       .with_date_of_birth(DateTime.new(1989, 1, 2))
       .with_age_over(18)
       .build
 
-    token_request = Yoti::Sandbox::Profile::TokenRequestBuilder.new
+    token_request = Yoti::Sandbox::Profile::TokenRequest
+      .builder
       .with_remember_me_id('some_remember_me_id')
       .with_given_names('Some Given Names', anchors: anchors)
       .with_family_name('Some Family Name', anchors: anchors)

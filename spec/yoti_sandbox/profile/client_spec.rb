@@ -37,7 +37,7 @@ describe 'Yoti::Sandbox::Profile::Client' do
       )
     end
     it 'raises an error' do
-      expect { client.setup_sharing_profile(profile) }.to raise_error RuntimeError
+      expect { client.setup_sharing_profile(profile) }.to raise_error Yoti::RequestError
     end
   end
   context 'with a custom base url' do
