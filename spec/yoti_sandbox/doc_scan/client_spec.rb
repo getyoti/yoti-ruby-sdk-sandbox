@@ -57,7 +57,7 @@ describe 'Yoti::Sandbox::DocScan::Client' do
 
       it 'raises an error' do
         expect { client.configure_session_response(some_session_id, some_response_config) }
-          .to raise_error Yoti::RequestError
+          .to raise_error Yoti::Sandbox::DocScan::Error
       end
     end
   end
@@ -92,7 +92,7 @@ describe 'Yoti::Sandbox::DocScan::Client' do
 
       it 'raises an error' do
         expect { client.configure_application_response(some_response_config) }
-          .to raise_error Yoti::RequestError
+          .to raise_error Yoti::Sandbox::DocScan::Error
       end
     end
   end
