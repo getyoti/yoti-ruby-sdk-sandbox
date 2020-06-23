@@ -1,6 +1,7 @@
 require 'yoti'
 
 require_relative 'doc_scan/client'
+require_relative 'doc_scan/errors'
 require_relative 'doc_scan/request/task_results'
 require_relative 'doc_scan/request/check_reports'
 require_relative 'doc_scan/request/response_config'
