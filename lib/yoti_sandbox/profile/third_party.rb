@@ -9,11 +9,17 @@ module Yoti
       # Provides attribute issuance details data entry
       #
       class AttributeIssuanceDetails < DataEntry
+        #
+        # @param [AttributeIssuanceDetailsValue] value
+        #
         def initialize(value)
           Validation.assert_is_a(AttributeIssuanceDetailsValue, value, 'value')
           super('THIRD_PARTY_ATTRIBUTE', value)
         end
 
+        #
+        # @return [AttributeIssuanceDetailsBuilder]
+        #
         def self.builder
           AttributeIssuanceDetailsBuilder.new
         end
@@ -50,7 +56,7 @@ module Yoti
         end
 
         #
-        # @param [AttributeDefinition] definition
+        # @param [String] definition
         #
         # @return [self]
         #
