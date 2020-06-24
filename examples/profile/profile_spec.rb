@@ -15,6 +15,19 @@ end
 
 describe 'sandbox example' do
   it 'returns a user profile' do
+    expiry_date = Time.new + 86_400
+    extra_data = Yoti::Sandbox::Profile::ExtraData
+                 .builder
+                 .with_data_entry(
+                   Yoti::Sandbox::Profile::AttributeIssuanceDetails
+                   .builder
+                   .with_expiry_date(expiry_date)
+                   .with_issuance_token('some-token')
+                   .with_definition('some-definition')
+                   .build
+                 )
+                 .build
+
     anchors = [
       Yoti::Sandbox::Profile::Anchor.source('PASSPORT'),
       Yoti::Sandbox::Profile::Anchor.verifier('YOTI_ADMIN')
@@ -48,6 +61,7 @@ describe 'sandbox example' do
                     .with_base64_selfie(Base64.strict_encode64('Some Selfie'))
                     .with_email_address('some@email.address')
                     .with_document_details('PASSPORT USA 1234abc', anchors: anchors)
+                    .with_extra_data(extra_data)
                     .build
 
     sandbox_client = Yoti::Sandbox::Profile::Client.new
@@ -82,5 +96,18 @@ describe 'sandbox example' do
 
     expect(profile.given_names.sources[0].value).to eql('PASSPORT')
     expect(profile.given_names.verifiers[0].value).to eql('YOTI_ADMIN')
+
+    attribute_issuance_details = activity_details
+                                 .extra_data
+                                 .attribute_issuance_details
+
+    expect(attribute_issuance_details.token)
+      .to eql(Base64.strict_encode64('some-token'))
+
+    expect(attribute_issuance_details.expiry_date.to_datetime.rfc3339(3))
+      .to eql(expiry_date.to_datetime.rfc3339(3))
+
+    expect(attribute_issuance_details.attributes.first.name)
+      .to eql('some-definition')
   end
 end
