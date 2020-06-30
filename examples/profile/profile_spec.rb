@@ -15,7 +15,8 @@ end
 
 describe 'sandbox example' do
   it 'returns a user profile' do
-    expiry_date = Time.new + 86_400
+    seconds_in_day = 86_400
+    expiry_date = Time.new + seconds_in_day 
     extra_data = Yoti::Sandbox::Profile::ExtraData
                  .builder
                  .with_data_entry(
