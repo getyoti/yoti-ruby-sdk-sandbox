@@ -29,6 +29,12 @@ describe 'sandbox example' do
                  )
                  .build
 
+    document_images = Yoti::Sandbox::Profile::DocumentImages
+                      .builder
+                      .with_jpeg_content('some-jpeg-content')
+                      .with_png_content('some-png-content')
+                      .build
+
     anchors = [
       Yoti::Sandbox::Profile::Anchor.source('PASSPORT'),
       Yoti::Sandbox::Profile::Anchor.verifier('YOTI_ADMIN')
@@ -62,6 +68,7 @@ describe 'sandbox example' do
                     .with_base64_selfie(Base64.strict_encode64('Some Selfie'))
                     .with_email_address('some@email.address')
                     .with_document_details('PASSPORT USA 1234abc', anchors: anchors)
+                    .with_document_images(document_images)
                     .with_extra_data(extra_data)
                     .build
 
@@ -89,6 +96,7 @@ describe 'sandbox example' do
     )
     expect(profile.selfie.value).to eql('Some Selfie')
     expect(profile.email_address.value).to eql('some@email.address')
+    expect(profile.document_images.value.count).to be(2)
 
     document_details = profile.document_details.value
     expect(document_details.type).to eql('PASSPORT')

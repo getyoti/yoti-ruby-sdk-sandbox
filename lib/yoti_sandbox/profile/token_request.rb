@@ -298,6 +298,22 @@ module Yoti
         end
 
         #
+        # @param [DocumentImages] document_images
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
+        def with_document_images(document_images, anchors: [])
+          with_attribute(
+            create_attribute(
+              name: Yoti::Attribute::DOCUMENT_IMAGES,
+              value: document_images.value,
+              anchors: anchors
+            )
+          )
+        end
+
+        #
         # @param [ExtraData] extra_data
         #
         # @return [self]
