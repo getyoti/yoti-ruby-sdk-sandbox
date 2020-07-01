@@ -479,6 +479,50 @@ describe 'Yoti::Sandbox::Profile::TokenRequest' do
     end
   end
 
+  describe '.with_document_images' do
+    let(:some_image_content) { 'some-jpeg' }
+    let(:expected_value) { data_url(some_image_content, 'image/jpeg') }
+
+    let :document_images do
+      Yoti::Sandbox::Profile::DocumentImages
+        .builder
+        .with_jpeg_content(some_image_content)
+        .build
+    end
+
+    context 'with anchors' do
+      let :token_request do
+        Yoti::Sandbox::Profile::TokenRequest
+          .builder
+          .with_document_images(document_images, anchors: some_anchors)
+          .build
+      end
+      it 'sets document details with anchors' do
+        expect(token_request)
+          .to have_attribute(
+            name: 'document_images',
+            value: expected_value,
+            anchors: some_anchors
+          )
+      end
+    end
+    context 'without anchors' do
+      let :token_request do
+        Yoti::Sandbox::Profile::TokenRequest
+          .builder
+          .with_document_images(document_images)
+          .build
+      end
+      it 'sets document details without anchors' do
+        expect(token_request)
+          .to have_attribute(
+            name: 'document_images',
+            value: expected_value
+          )
+      end
+    end
+  end
+
   describe '.with_remember_me_id' do
     let :some_remember_me_id do
       'REMEMBER ME'
