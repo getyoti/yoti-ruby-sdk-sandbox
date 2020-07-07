@@ -14,12 +14,19 @@ module Yoti
       #
       class TokenRequest
         #
-        # @param [String] remember_me_id
+        # @param [String, nil] remember_me_id
         # @param [Array<Attribute>] attributes
+        # @param [ExtraData, nil] extra_data
         #
-        def initialize(remember_me_id, attributes)
+        def initialize(remember_me_id, attributes, extra_data = nil)
+          Validation.assert_is_a(String, remember_me_id, 'remember_me_id', true)
           @remember_me_id = remember_me_id
+
+          Validation.assert_is_a(Array, attributes, 'attributes')
           @attributes = attributes
+
+          Validation.assert_is_a(ExtraData, extra_data, 'extra_data', true)
+          @extra_data = extra_data
         end
 
         #
@@ -35,8 +42,9 @@ module Yoti
         def as_json(*_args)
           {
             remember_me_id: @remember_me_id,
-            profile_attributes: @attributes.map(&:as_json)
-          }
+            profile_attributes: @attributes.map(&:as_json),
+            extra_data: @extra_data
+          }.compact
         end
 
         #
@@ -52,7 +60,6 @@ module Yoti
       #
       class TokenRequestBuilder
         def initialize
-          @remember_me_id = ''
           @attributes = []
         end
 
@@ -291,10 +298,37 @@ module Yoti
         end
 
         #
+        # @param [DocumentImages] document_images
+        # @param [Array<Anchor>] anchors
+        #
+        # @return [self]
+        #
+        def with_document_images(document_images, anchors: [])
+          with_attribute(
+            create_attribute(
+              name: Yoti::Attribute::DOCUMENT_IMAGES,
+              value: document_images.value,
+              anchors: anchors
+            )
+          )
+        end
+
+        #
+        # @param [ExtraData] extra_data
+        #
+        # @return [self]
+        #
+        def with_extra_data(extra_data)
+          Validation.assert_is_a(ExtraData, extra_data, 'extra_data')
+          @extra_data = extra_data
+          self
+        end
+
+        #
         # @return [TokenRequest]
         #
         def build
-          TokenRequest.new(@remember_me_id, @attributes)
+          TokenRequest.new(@remember_me_id, @attributes, @extra_data)
         end
 
         private

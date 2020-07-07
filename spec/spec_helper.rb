@@ -26,3 +26,13 @@ end
 def clear_config
   Yoti.configuration = nil
 end
+
+#
+# @param [bin, String] content
+# @param [String] content_type
+#
+# @return [String]
+#
+def data_url(content, content_type)
+  "data:#{content_type};base64,#{Base64.strict_encode64(content)}"
+end

@@ -42,7 +42,3 @@ Style/MutableConstant:
 
 Layout/LineLength:
   Enabled: false
-
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - examples/**/*.rb
