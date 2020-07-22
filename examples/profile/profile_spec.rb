@@ -110,8 +110,8 @@ describe 'sandbox example' do
                                  .extra_data
                                  .attribute_issuance_details
 
-    expect(attribute_issuance_details.token)
-      .to eql(Base64.strict_encode64('some-token'))
+    expect(Base64.urlsafe_decode64(attribute_issuance_details.token))
+      .to eql('some-token')
 
     expect(attribute_issuance_details.expiry_date.to_datetime.rfc3339(3))
       .to eql(expiry_date.to_datetime.rfc3339(3))
