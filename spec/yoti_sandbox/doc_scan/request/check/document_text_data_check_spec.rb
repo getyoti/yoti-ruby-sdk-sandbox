@@ -54,7 +54,10 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
   context 'when document fields are provided' do
     let :some_document_fields do
       {
-        'some' => 'field'
+        'some_key' => 'some_value',
+        'some_other_key' => {
+          'nested_key' => 'nested_value'
+        }
       }
     end
 
@@ -88,7 +91,8 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
-        .with_document_field('some', 'field')
+        .with_document_field('some_key', 'some_value')
+        .with_document_field('some_other_key', { 'nested_key' => 'nested_value' })
         .build
     end
 
@@ -100,7 +104,10 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
             'breakdown' => [some_breakdown.as_json]
           },
           'document_fields' => {
-            'some' => 'field'
+            'some_key' => 'some_value',
+            'some_other_key' => {
+              'nested_key' => 'nested_value'
+            }
           }
         }
       }

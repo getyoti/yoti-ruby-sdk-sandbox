@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module Yoti
   module Sandbox
     module DocScan
@@ -45,7 +47,7 @@ module Yoti
           #
           def initialize(document_fields)
             Validation.assert_is_a(Hash, document_fields, 'document_fields')
-            document_fields.each { |_k, v| Validation.assert_is_a(String, v, 'document_fields value') }
+            document_fields.each { |_k, v| Validation.assert_respond_to(:to_json, v, 'document_fields value') }
             @document_fields = document_fields
           end
 
@@ -67,13 +69,13 @@ module Yoti
 
           #
           # @param [String] key
-          # @param [String] value
+          # @param [#to_json] value
           #
           # @return [self]
           #
           def with_document_field(key, value)
             Validation.assert_is_a(String, key, 'key')
-            Validation.assert_is_a(String, value, 'value')
+            Validation.assert_respond_to(:to_json, value, 'value')
             @document_fields[key] = value
             self
           end
