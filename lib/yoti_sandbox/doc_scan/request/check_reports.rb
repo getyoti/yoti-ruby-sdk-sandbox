@@ -11,13 +11,15 @@ module Yoti
           # @param [Array<LivenessCheck>] liveness_checks
           # @param [Array<DocumentFaceMatchCheck>] document_face_match_checks
           # @param [Integer] async_report_delay
+          # @param [Array<IdDocumentComparisonCheck>] id_document_comparison_checks
           #
           def initialize(
             document_text_data_checks,
             document_authenticity_checks,
             liveness_checks,
             document_face_match_checks,
-            async_report_delay
+            async_report_delay,
+            id_document_comparison_checks = nil
           )
             Validation.assert_is_a(Array, document_text_data_checks, 'document_text_data_checks')
             @document_text_data_checks = document_text_data_checks
@@ -33,6 +35,9 @@ module Yoti
 
             Validation.assert_is_a(Integer, async_report_delay, 'async_report_delay', true)
             @async_report_delay = async_report_delay
+
+            Validation.assert_is_a(Array, id_document_comparison_checks, 'id_document_comparison_checks', true)
+            @id_document_comparison_checks = id_document_comparison_checks
           end
 
           def self.builder
@@ -45,12 +50,13 @@ module Yoti
 
           def as_json(*_args)
             {
-              Yoti::DocScan::Constants::ID_DOCUMENT_TEXT_DATA_CHECK => @document_text_data_checks,
-              Yoti::DocScan::Constants::ID_DOCUMENT_AUTHENTICITY => @document_authenticity_checks,
-              Yoti::DocScan::Constants::ID_DOCUMENT_FACE_MATCH => @document_face_match_checks,
-              Yoti::DocScan::Constants::LIVENESS => @liveness_checks,
-              :async_report_delay => @async_report_delay
-            }
+              ID_DOCUMENT_TEXT_DATA_CHECK: @document_text_data_checks,
+              ID_DOCUMENT_AUTHENTICITY: @document_authenticity_checks,
+              ID_DOCUMENT_FACE_MATCH: @document_face_match_checks,
+              LIVENESS: @liveness_checks,
+              ID_DOCUMENT_COMPARISON: @id_document_comparison_checks,
+              async_report_delay: @async_report_delay
+            }.compact
           end
         end
 
@@ -60,6 +66,7 @@ module Yoti
             @document_text_data_checks = []
             @document_authenticity_checks = []
             @document_face_match_checks = []
+            @id_document_comparison_checks = []
           end
 
           #
@@ -118,6 +125,17 @@ module Yoti
           end
 
           #
+          # @param [IdDocumentComparisonCheck] id_document_comparison_check
+          #
+          # @return [self]
+          #
+          def with_id_document_comparison_check(id_document_comparison_check)
+            Validation.assert_is_a(IdDocumentComparisonCheck, id_document_comparison_check, 'id_document_comparison_check')
+            @id_document_comparison_checks << id_document_comparison_check
+            self
+          end
+
+          #
           # @return [CheckReports]
           #
           def build
@@ -126,7 +144,8 @@ module Yoti
               @document_authenticity_checks,
               @liveness_checks,
               @document_face_match_checks,
-              @async_report_delay
+              @async_report_delay,
+              @id_document_comparison_checks
             )
           end
         end

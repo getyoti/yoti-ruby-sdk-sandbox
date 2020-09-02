@@ -28,6 +28,10 @@ Metrics/MethodLength:
   CountComments: false
   Max: 19
 
+Metrics/ParameterLists:
+  Exclude:
+    - lib/yoti_sandbox/doc_scan/request/check_reports.rb
+
 Style/Documentation:
   Enabled: false
 
