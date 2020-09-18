@@ -41,8 +41,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
           'report' => {
             'recommendation' => some_recommendation.as_json,
             'breakdown' => [some_breakdown.as_json]
-          },
-          'document_fields' => {}
+          }
         },
         'document_filter' => some_filter.as_json
       }
@@ -142,8 +141,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
               some_breakdown.as_json,
               some_other_breakdown.as_json
             ]
-          },
-          'document_fields' => {}
+          }
         }
       }
 
