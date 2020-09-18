@@ -20,9 +20,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
 
     it 'serializes with document filter' do
       expected = {
-        'result' => {
-          'document_fields' => {}
-        },
+        'result' => {},
         'document_filter' => some_filter.as_json
       }
 

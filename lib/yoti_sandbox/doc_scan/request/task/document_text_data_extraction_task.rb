@@ -43,11 +43,13 @@ module Yoti
 
         class DocumentTextDataExtractionTaskResult
           #
-          # @param [Hash] document_fields
+          # @param [Hash,nil] document_fields
           #
           def initialize(document_fields)
-            Validation.assert_is_a(Hash, document_fields, 'document_fields')
-            document_fields.each { |_k, v| Validation.assert_respond_to(:to_json, v, 'document_fields value') }
+            unless document_fields.nil?
+              Validation.assert_is_a(Hash, document_fields, 'document_fields')
+              document_fields.each { |_k, v| Validation.assert_respond_to(:to_json, v, 'document_fields value') }
+            end
             @document_fields = document_fields
           end
 
@@ -58,15 +60,11 @@ module Yoti
           def as_json(*_args)
             {
               document_fields: @document_fields
-            }
+            }.compact
           end
         end
 
         class DocumentTextDataExtractionTaskBuilder
-          def initialize
-            @document_fields = {}
-          end
-
           #
           # @param [String] key
           # @param [#to_json] value
@@ -76,6 +74,7 @@ module Yoti
           def with_document_field(key, value)
             Validation.assert_is_a(String, key, 'key')
             Validation.assert_respond_to(:to_json, value, 'value')
+            @document_fields ||= {}
             @document_fields[key] = value
             self
           end
