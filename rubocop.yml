@@ -11,6 +11,7 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/**/*.rb
     - examples/**/*.rb
+    - yoti_sandbox.gemspec
 
 Metrics/ClassLength:
   Enabled: false
@@ -27,6 +28,10 @@ Metrics/MethodLength:
   Enabled: false
   CountComments: false
   Max: 19
+
+Metrics/ParameterLists:
+  Exclude:
+    - lib/yoti_sandbox/doc_scan/request/check_reports.rb
 
 Style/Documentation:
   Enabled: false

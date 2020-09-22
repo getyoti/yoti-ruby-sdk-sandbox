@@ -33,7 +33,10 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
   context 'when document fields are provided' do
     let :some_document_fields do
       {
-        'some' => 'field'
+        'some_key' => 'some_value',
+        'some_other_key' => {
+          'nested_key' => 'nested_value'
+        }
       }
     end
 
@@ -59,7 +62,8 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     let :check do
       Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
         .builder
-        .with_document_field('some', 'field')
+        .with_document_field('some_key', 'some_value')
+        .with_document_field('some_other_key', { 'nested_key' => 'nested_value' })
         .build
     end
 
@@ -67,7 +71,10 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
       expected = {
         'result' => {
           'document_fields' => {
-            'some' => 'field'
+            'some_key' => 'some_value',
+            'some_other_key' => {
+              'nested_key' => 'nested_value'
+            }
           }
         }
       }

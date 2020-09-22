@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'yoti_sandbox'
-  spec.version       = '1.2.1'
+  spec.version       = '1.3.0'
   spec.authors       = ['Yoti']
   spec.email         = ['websdk@yoti.com']
 
@@ -16,7 +16,20 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/getyoti/yoti-ruby-sdk-sandbox'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|examples)/|^sonar-project.properties$|^.dependabot/config.yml$|^.travis.yml$}) }
+  exclude_patterns = [
+    '^(test|spec|features|examples|docs|.github)/',
+    '^.gitignore$',
+    '^.pre-commit-config.yaml$',
+    '^sonar-project.properties$',
+    '^.dependabot/config.yml$',
+    '^.travis.yml$',
+    '^CONTRIBUTING.md$',
+    '^Guardfile$',
+    '^Rakefile$',
+    '^yardstick.yml$',
+    '^rubocop.yml$'
+  ]
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(/#{exclude_patterns.join('|')}/) }
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.4'
