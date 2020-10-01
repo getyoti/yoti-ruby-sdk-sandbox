@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'base64'
 
 describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
   context 'when document filter is provided' do
@@ -73,6 +74,28 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
             'some_other_key' => {
               'nested_key' => 'nested_value'
             }
+          }
+        }
+      }
+
+      expect(check.to_json).to eql expected.to_json
+    end
+  end
+
+  context 'when document ID photo is provided' do
+    let :check do
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+        .builder
+        .with_document_id_photo('some_content_type', 'some_data')
+        .build
+    end
+
+    it 'serializes with document ID photo' do
+      expected = {
+        'result' => {
+          'document_id_photo' => {
+            'content_type' => 'some_content_type',
+            'data' => Base64.strict_encode64('some_data')
           }
         }
       }
