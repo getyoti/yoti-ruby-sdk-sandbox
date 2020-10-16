@@ -12,7 +12,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
         .build
     end
 
-    let :check do
+    let :task do
       Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
         .builder
         .with_document_filter(some_filter)
@@ -25,7 +25,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
         'document_filter' => some_filter.as_json
       }
 
-      expect(check.to_json).to eql expected.to_json
+      expect(task.to_json).to eql expected.to_json
     end
   end
 
@@ -39,7 +39,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
       }
     end
 
-    let :check do
+    let :task do
       Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
         .builder
         .with_document_fields(some_document_fields)
@@ -53,12 +53,12 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
         }
       }
 
-      expect(check.to_json).to eql expected.to_json
+      expect(task.to_json).to eql expected.to_json
     end
   end
 
   context 'when document field is provided' do
-    let :check do
+    let :task do
       Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
         .builder
         .with_document_field('some_key', 'some_value')
@@ -78,12 +78,12 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
         }
       }
 
-      expect(check.to_json).to eql expected.to_json
+      expect(task.to_json).to eql expected.to_json
     end
   end
 
   context 'when document ID photo is provided' do
-    let :check do
+    let :task do
       Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
         .builder
         .with_document_id_photo('some_content_type', 'some_data')
@@ -100,7 +100,54 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
         }
       }
 
-      expect(check.to_json).to eql expected.to_json
+      expect(task.to_json).to eql expected.to_json
+    end
+  end
+
+  context 'when recommendation is provided' do
+    let :recommendation do
+      Yoti::Sandbox::DocScan::Request::TextDataExtractionRecommendation
+        .builder
+        .for_progress
+        .build
+    end
+
+    let :task do
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+        .builder
+        .with_recommendation(recommendation)
+        .build
+    end
+
+    it 'serializes with recommendation' do
+      expected = {
+        'result' => {
+          'recommendation' => recommendation
+        }
+      }
+
+      expect(task.to_json).to eql expected.to_json
+    end
+  end
+
+  context 'when detected country is provided' do
+    let(:some_detected_country) { 'some-country' }
+
+    let :task do
+      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+        .builder
+        .with_detected_country(some_detected_country)
+        .build
+    end
+
+    it 'serializes with detected country' do
+      expected = {
+        'result' => {
+          'detected_country' => some_detected_country
+        }
+      }
+
+      expect(task.to_json).to eql expected.to_json
     end
   end
 end
