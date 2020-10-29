@@ -10,7 +10,7 @@ module Yoti
           # @param [DocumentFilter] document_filter
           #
           def initialize(result, document_filter)
-            raise(TypeError, "#{self.class} cannot be instantiated") if self.class == DocumentCheck
+            raise(TypeError, "#{self.class} cannot be instantiated") if instance_of?(DocumentCheck)
 
             super(result)
 
@@ -27,7 +27,7 @@ module Yoti
 
         class DocumentCheckBuilder < CheckBuilder
           def initialize
-            raise(TypeError, "#{self.class} cannot be instantiated") if self.class == DocumentCheckBuilder
+            raise(TypeError, "#{self.class} cannot be instantiated") if instance_of?(DocumentCheckBuilder)
 
             super
           end
