@@ -19,7 +19,8 @@ module Yoti
             liveness_checks,
             document_face_match_checks,
             async_report_delay,
-            id_document_comparison_checks = nil
+            id_document_comparison_checks = nil,
+            supplementary_document_text_data_checks = nil
           )
             Validation.assert_is_a(Array, document_text_data_checks, 'document_text_data_checks')
             @document_text_data_checks = document_text_data_checks
@@ -38,6 +39,14 @@ module Yoti
 
             Validation.assert_is_a(Array, id_document_comparison_checks, 'id_document_comparison_checks', true)
             @id_document_comparison_checks = id_document_comparison_checks
+
+            Validation.assert_is_a(
+              Array,
+              supplementary_document_text_data_checks,
+              'supplementary_document_text_data_checks',
+              true
+            )
+            @supplementary_document_text_data_checks = supplementary_document_text_data_checks
           end
 
           def self.builder
@@ -55,6 +64,7 @@ module Yoti
               ID_DOCUMENT_FACE_MATCH: @document_face_match_checks,
               LIVENESS: @liveness_checks,
               ID_DOCUMENT_COMPARISON: @id_document_comparison_checks,
+              SUPPLEMENTARY_DOCUMENT_TEXT_DATA_CHECK: @supplementary_document_text_data_checks,
               async_report_delay: @async_report_delay
             }.compact
           end
@@ -67,6 +77,7 @@ module Yoti
             @document_authenticity_checks = []
             @document_face_match_checks = []
             @id_document_comparison_checks = []
+            @supplementary_document_text_data_checks = []
           end
 
           #
@@ -136,6 +147,21 @@ module Yoti
           end
 
           #
+          # @param [SupplementaryDocumentTextDataCheck] supplementary_document_text_data_check
+          #
+          # @return [self]
+          #
+          def with_supplementary_document_text_data_check(supplementary_document_text_data_check)
+            Validation.assert_is_a(
+              SupplementaryDocumentTextDataCheck,
+              supplementary_document_text_data_check,
+              'supplementary_document_text_data_check'
+            )
+            @supplementary_document_text_data_checks << supplementary_document_text_data_check
+            self
+          end
+
+          #
           # @return [CheckReports]
           #
           def build
@@ -145,7 +171,8 @@ module Yoti
               @liveness_checks,
               @document_face_match_checks,
               @async_report_delay,
-              @id_document_comparison_checks
+              @id_document_comparison_checks,
+              @supplementary_document_text_data_checks
             )
           end
         end
