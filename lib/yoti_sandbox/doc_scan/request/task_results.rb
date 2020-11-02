@@ -7,14 +7,25 @@ module Yoti
         class TaskResults
           #
           # @param [Array<DocumentTextDataExtractionTask>] document_text_data_extraction_tasks
+          # @param [Array<SupplementaryDocumentTextDataExtractionTask>] supplementary_document_text_data_extraction_tasks
           #
-          def initialize(document_text_data_extraction_tasks)
+          def initialize(
+            document_text_data_extraction_tasks,
+            supplementary_document_text_data_extraction_tasks
+          )
             Validation.assert_is_a(
               Array,
               document_text_data_extraction_tasks,
               'document_text_data_extraction_tasks'
             )
             @document_text_data_extraction_tasks = document_text_data_extraction_tasks
+
+            Validation.assert_is_a(
+              Array,
+              supplementary_document_text_data_extraction_tasks,
+              'supplementary_document_text_data_extraction_tasks'
+            )
+            @supplementary_document_text_data_extraction_tasks = supplementary_document_text_data_extraction_tasks
           end
 
           def self.builder
@@ -27,7 +38,8 @@ module Yoti
 
           def as_json(*_args)
             {
-              Yoti::DocScan::Constants::ID_DOCUMENT_TEXT_DATA_EXTRACTION => @document_text_data_extraction_tasks
+              ID_DOCUMENT_TEXT_DATA_EXTRACTION: @document_text_data_extraction_tasks,
+              SUPPLEMENTARY_DOCUMENT_TEXT_DATA_EXTRACTION: @supplementary_document_text_data_extraction_tasks
             }
           end
         end
@@ -35,6 +47,7 @@ module Yoti
         class TaskResultsBuilder
           def initialize
             @document_text_data_extraction_tasks = []
+            @supplementary_document_text_data_extraction_tasks = []
           end
 
           #
@@ -53,10 +66,28 @@ module Yoti
           end
 
           #
+          # @param [SupplementaryDocumentTextDataExtractionTask] supplementary_document_text_data_extraction_task
+          #
+          # @return [self]
+          #
+          def with_supplementary_document_text_data_extraction_task(supplementary_document_text_data_extraction_task)
+            Validation.assert_is_a(
+              SupplementaryDocumentTextDataExtractionTask,
+              supplementary_document_text_data_extraction_task,
+              'supplementary_document_text_data_extraction_task'
+            )
+            @supplementary_document_text_data_extraction_tasks << supplementary_document_text_data_extraction_task
+            self
+          end
+
+          #
           # @return [TaskResults]
           #
           def build
-            TaskResults.new(@document_text_data_extraction_tasks)
+            TaskResults.new(
+              @document_text_data_extraction_tasks,
+              @supplementary_document_text_data_extraction_tasks
+            )
           end
         end
       end

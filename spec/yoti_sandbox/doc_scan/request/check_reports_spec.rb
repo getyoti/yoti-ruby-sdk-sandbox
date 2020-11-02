@@ -58,6 +58,14 @@ describe 'Yoti::Sandbox::DocScan::Request::CheckReports' do
       .build
   end
 
+  let :some_supplementary_text_data_check do
+    Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck
+      .builder
+      .with_breakdown(some_breakdown)
+      .with_recommendation(some_recommendation)
+      .build
+  end
+
   describe '.to_json' do
     let :check_reports do
       Yoti::Sandbox::DocScan::Request::CheckReports
@@ -67,6 +75,7 @@ describe 'Yoti::Sandbox::DocScan::Request::CheckReports' do
         .with_document_face_match_check(some_face_match_check)
         .with_document_text_data_check(some_text_data_check)
         .with_liveness_check(some_liveness_check)
+        .with_supplementary_document_text_data_check(some_supplementary_text_data_check)
         .with_async_report_delay(3)
         .build
     end
@@ -78,6 +87,7 @@ describe 'Yoti::Sandbox::DocScan::Request::CheckReports' do
         ID_DOCUMENT_FACE_MATCH: [some_face_match_check.as_json],
         LIVENESS: [some_liveness_check.as_json],
         ID_DOCUMENT_COMPARISON: [some_comparison_check.as_json],
+        SUPPLEMENTARY_DOCUMENT_TEXT_DATA_CHECK: [some_supplementary_text_data_check.as_json],
         async_report_delay: 3
       }
 
