@@ -9,7 +9,7 @@ module Yoti
           # @param [CheckResult] result
           #
           def initialize(result)
-            raise(TypeError, "#{self.class} cannot be instantiated") if self.class == Check
+            raise(TypeError, "#{self.class} cannot be instantiated") if instance_of?(Check)
 
             Validation.assert_is_a(CheckResult, result, 'result')
             @result = result

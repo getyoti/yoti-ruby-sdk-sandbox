@@ -6,16 +6,16 @@ module Yoti
   module Sandbox
     module DocScan
       module Request
-        class DocumentTextDataCheck < DocumentCheck
+        class SupplementaryDocumentTextDataCheck < DocumentCheck
           #
-          # @return [DocumentTextDataCheckBuilder]
+          # @return [SupplementaryDocumentTextDataCheckBuilder]
           #
           def self.builder
-            DocumentTextDataCheckBuilder.new
+            SupplementaryDocumentTextDataCheckBuilder.new
           end
         end
 
-        class DocumentTextDataCheckResult < CheckResult
+        class SupplementaryDocumentTextDataCheckResult < CheckResult
           #
           # @param [CheckReport] report
           # @param [Hash,nil] document_fields
@@ -37,7 +37,7 @@ module Yoti
           end
         end
 
-        class DocumentTextDataCheckBuilder < DocumentCheckBuilder
+        class SupplementaryDocumentTextDataCheckBuilder < DocumentCheckBuilder
           #
           # @param [String] key
           # @param [#to_json] value
@@ -64,12 +64,12 @@ module Yoti
           end
 
           #
-          # @return [DocumentTextDataCheck]
+          # @return [SupplementaryDocumentTextDataCheck]
           #
           def build
             report = CheckReport.new(@recommendation, @breakdowns)
-            result = DocumentTextDataCheckResult.new(report, @document_fields)
-            DocumentTextDataCheck.new(result, @document_filter)
+            result = SupplementaryDocumentTextDataCheckResult.new(report, @document_fields)
+            SupplementaryDocumentTextDataCheck.new(result, @document_filter)
           end
         end
       end

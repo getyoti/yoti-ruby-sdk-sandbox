@@ -6,13 +6,13 @@ module Yoti
   module Sandbox
     module DocScan
       module Request
-        class DocumentTextDataExtractionTask
+        class SupplementaryDocumentTextDataExtractionTask
           #
-          # @param [DocumentTextDataExtractionTaskResult] result
+          # @param [SupplementaryDocumentTextDataExtractionTaskResult] result
           # @param [DocumentFilter] document_filter
           #
           def initialize(result, document_filter)
-            Validation.assert_is_a(DocumentTextDataExtractionTaskResult, result, 'result')
+            Validation.assert_is_a(SupplementaryDocumentTextDataExtractionTaskResult, result, 'result')
             @result = result
 
             Validation.assert_is_a(DocumentFilter, document_filter, 'document_filter', true)
@@ -32,23 +32,21 @@ module Yoti
           end
 
           #
-          # @return [DocumentTextDataExtractionTaskBuilder]
+          # @return [SupplementaryDocumentTextDataExtractionTaskBuilder]
           #
           def self.builder
-            DocumentTextDataExtractionTaskBuilder.new
+            SupplementaryDocumentTextDataExtractionTaskBuilder.new
           end
         end
 
-        class DocumentTextDataExtractionTaskResult
+        class SupplementaryDocumentTextDataExtractionTaskResult
           #
           # @param [Hash,nil] document_fields
-          # @param [DocumentIdPhoto,nil] document_id_photo
           # @param [String,nil] detected_country
           # @param [TextDataExtractionRecommendation,nil] recommendation
           #
           def initialize(
             document_fields,
-            document_id_photo = nil,
             detected_country = nil,
             recommendation = nil
           )
@@ -57,9 +55,6 @@ module Yoti
               document_fields.each { |_k, v| Validation.assert_respond_to(:to_json, v, 'document_fields value') }
             end
             @document_fields = document_fields
-
-            Validation.assert_is_a(DocumentIdPhoto, document_id_photo, 'document_id_photo', true)
-            @document_id_photo = document_id_photo
 
             Validation.assert_is_a(String, detected_country, 'detected_country', true)
             @detected_country = detected_country
@@ -75,14 +70,13 @@ module Yoti
           def as_json(*_args)
             {
               document_fields: @document_fields,
-              document_id_photo: @document_id_photo,
               detected_country: @detected_country,
               recommendation: @recommendation
             }.compact
           end
         end
 
-        class DocumentTextDataExtractionTaskBuilder
+        class SupplementaryDocumentTextDataExtractionTaskBuilder
           #
           # @param [String] key
           # @param [#to_json] value
@@ -119,17 +113,6 @@ module Yoti
           end
 
           #
-          # @param [String] content_type
-          # @param [bin] data
-          #
-          # @return [self]
-          #
-          def with_document_id_photo(content_type, data)
-            @document_id_photo = DocumentIdPhoto.new(content_type, data)
-            self
-          end
-
-          #
           # @param [TextDataExtractionRecommendation] recommendation
           #
           # @return [self]
@@ -152,16 +135,15 @@ module Yoti
           end
 
           #
-          # @return [DocumentTextDataExtractionTask]
+          # @return [SupplementaryDocumentTextDataExtractionTask]
           #
           def build
-            result = DocumentTextDataExtractionTaskResult.new(
+            result = SupplementaryDocumentTextDataExtractionTaskResult.new(
               @document_fields,
-              @document_id_photo,
               @detected_country,
               @recommendation
             )
-            DocumentTextDataExtractionTask.new(result, @document_filter)
+            SupplementaryDocumentTextDataExtractionTask.new(result, @document_filter)
           end
         end
       end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
+describe 'Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck' do
   let :some_breakdown do
     Yoti::Sandbox::DocScan::Request::Breakdown
       .builder
@@ -27,7 +27,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
@@ -61,7 +61,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
@@ -86,7 +86,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
 
   context 'when document field is provided' do
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck
         .builder
         .with_breakdown(some_breakdown)
         .with_recommendation(some_recommendation)
@@ -125,7 +125,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck' do
     end
 
     let :check do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataCheck
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataCheck
         .builder
         .with_breakdowns([some_breakdown, some_other_breakdown])
         .with_recommendation(some_recommendation)

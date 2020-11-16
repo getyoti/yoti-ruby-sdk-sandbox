@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'base64'
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
+describe 'Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask' do
   context 'when document filter is provided' do
     let :some_filter do
       Yoti::Sandbox::DocScan::Request::DocumentFilter
@@ -13,7 +13,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     end
 
     let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask
         .builder
         .with_document_filter(some_filter)
         .build
@@ -40,7 +40,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     end
 
     let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask
         .builder
         .with_document_fields(some_document_fields)
         .build
@@ -59,7 +59,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
 
   context 'when document field is provided' do
     let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask
         .builder
         .with_document_field('some_key', 'some_value')
         .with_document_field('some_other_key', { 'nested_key' => 'nested_value' })
@@ -82,28 +82,6 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     end
   end
 
-  context 'when document ID photo is provided' do
-    let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
-        .builder
-        .with_document_id_photo('some_content_type', 'some_data')
-        .build
-    end
-
-    it 'serializes with document ID photo' do
-      expected = {
-        'result' => {
-          'document_id_photo' => {
-            'content_type' => 'some_content_type',
-            'data' => Base64.strict_encode64('some_data')
-          }
-        }
-      }
-
-      expect(task.to_json).to eql expected.to_json
-    end
-  end
-
   context 'when recommendation is provided' do
     let :recommendation do
       Yoti::Sandbox::DocScan::Request::TextDataExtractionRecommendation
@@ -113,7 +91,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     end
 
     let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask
         .builder
         .with_recommendation(recommendation)
         .build
@@ -134,7 +112,7 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
     let(:some_detected_country) { 'some-country' }
 
     let :task do
-      Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask
+      Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTask
         .builder
         .with_detected_country(some_detected_country)
         .build
@@ -152,9 +130,9 @@ describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTask' do
   end
 end
 
-describe 'Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTaskResult' do
+describe 'Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTaskResult' do
   let :result do
-    Yoti::Sandbox::DocScan::Request::DocumentTextDataExtractionTaskResult.new({})
+    Yoti::Sandbox::DocScan::Request::SupplementaryDocumentTextDataExtractionTaskResult.new({})
   end
 
   describe '.to_json' do

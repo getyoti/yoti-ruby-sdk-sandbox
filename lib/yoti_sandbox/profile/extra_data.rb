@@ -41,7 +41,7 @@ module Yoti
         # @param [#as_json] value
         #
         def initialize(type, value)
-          raise(TypeError, "#{self.class} cannot be instantiated") if self.class == DataEntry
+          raise(TypeError, "#{self.class} cannot be instantiated") if instance_of?(DataEntry)
 
           Validation.assert_is_a(String, type, 'type')
           @type = type

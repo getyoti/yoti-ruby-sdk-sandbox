@@ -10,7 +10,7 @@ module Yoti
           # @param [String] liveness_type
           #
           def initialize(result, liveness_type)
-            raise(TypeError, "#{self.class} cannot be instantiated") if self.class == LivenessCheck
+            raise(TypeError, "#{self.class} cannot be instantiated") if instance_of?(LivenessCheck)
 
             super(result)
 
