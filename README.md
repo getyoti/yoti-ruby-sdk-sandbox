@@ -1,6 +1,6 @@
 # Yoti Ruby Sandbox SDK
 
-[![Build Status](https://travis-ci.com/getyoti/yoti-ruby-sdk-sandbox.svg?branch=master)](https://travis-ci.com/getyoti/yoti-ruby-sdk-sandbox)
+[![Build Status](https://github.com/getyoti/yoti-java-sdk/workflows/Unit%20Test/badge.svg?branch=master)](https://github.com/getyoti/yoti-java-sdk/actions)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Aruby-sandbox&metric=coverage)](https://sonarcloud.io/dashboard?id=getyoti%3Aruby-sandbox)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Aruby-sandbox&metric=bugs)](https://sonarcloud.io/dashboard?id=getyoti%3Aruby-sandbox)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=getyoti%3Aruby-sandbox&metric=code_smells)](https://sonarcloud.io/dashboard?id=getyoti%3Aruby-sandbox)
