@@ -12,6 +12,7 @@ module Yoti
           # @param [Array<DocumentFaceMatchCheck>] document_face_match_checks
           # @param [Integer] async_report_delay
           # @param [Array<IdDocumentComparisonCheck>] id_document_comparison_checks
+          # @param [Array<ThirdPartyIdentityCheck>] third_party_identity_checks
           #
           def initialize(
             document_text_data_checks,
@@ -20,7 +21,8 @@ module Yoti
             document_face_match_checks,
             async_report_delay,
             id_document_comparison_checks = nil,
-            supplementary_document_text_data_checks = nil
+            supplementary_document_text_data_checks = nil,
+            third_party_identity_checks = nil
           )
             Validation.assert_is_a(Array, document_text_data_checks, 'document_text_data_checks')
             @document_text_data_checks = document_text_data_checks
@@ -47,6 +49,14 @@ module Yoti
               true
             )
             @supplementary_document_text_data_checks = supplementary_document_text_data_checks
+
+            Validation.assert_is_a(
+              Array,
+              third_party_identity_checks,
+              'third_party_identity_checks',
+              true
+            )
+            @third_party_identity_checks = third_party_identity_checks
           end
 
           def self.builder
@@ -65,6 +75,7 @@ module Yoti
               LIVENESS: @liveness_checks,
               ID_DOCUMENT_COMPARISON: @id_document_comparison_checks,
               SUPPLEMENTARY_DOCUMENT_TEXT_DATA_CHECK: @supplementary_document_text_data_checks,
+              THIRD_PARTY_IDENTITY: @third_party_identity_checks,
               async_report_delay: @async_report_delay
             }.compact
           end
@@ -78,6 +89,7 @@ module Yoti
             @document_face_match_checks = []
             @id_document_comparison_checks = []
             @supplementary_document_text_data_checks = []
+            @third_party_identity_checks = []
           end
 
           #
@@ -110,6 +122,17 @@ module Yoti
           def with_document_authenticity_check(document_authenticity_check)
             Validation.assert_is_a(DocumentAuthenticityCheck, document_authenticity_check, 'document_authenticity_check')
             @document_authenticity_checks << document_authenticity_check
+            self
+          end
+
+          #
+          # @param [ThirdPartyIdentityCheck] third_party_identity_check
+          #
+          # @return [self]
+          #
+          def with_third_party_identity_check(third_party_identity_check)
+            Validation.assert_is_a(ThirdPartyIdentityCheck, third_party_identity_check, 'third_party_identity_check')
+            @third_party_identity_checks << third_party_identity_check
             self
           end
 
@@ -172,7 +195,8 @@ module Yoti
               @document_face_match_checks,
               @async_report_delay,
               @id_document_comparison_checks,
-              @supplementary_document_text_data_checks
+              @supplementary_document_text_data_checks,
+              @third_party_identity_checks
             )
           end
         end
