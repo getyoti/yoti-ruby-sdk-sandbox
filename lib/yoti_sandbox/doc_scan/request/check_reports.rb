@@ -75,7 +75,7 @@ module Yoti
               LIVENESS: @liveness_checks,
               ID_DOCUMENT_COMPARISON: @id_document_comparison_checks,
               SUPPLEMENTARY_DOCUMENT_TEXT_DATA_CHECK: @supplementary_document_text_data_checks,
-              THIRD_PARTY_IDENTITY: @third_party_identity_checks,
+              THIRD_PARTY_IDENTITY: @third_party_identity_checks[0],
               async_report_delay: @async_report_delay
             }.compact
           end
