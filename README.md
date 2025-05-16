@@ -1,3 +1,5 @@
+## NOTE: this repository is no longer maintained.
+
 # Yoti Ruby Sandbox SDK
 
 [![Build Status](https://travis-ci.com/getyoti/yoti-ruby-sdk-sandbox.svg?branch=master)](https://travis-ci.com/getyoti/yoti-ruby-sdk-sandbox)
